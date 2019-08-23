@@ -1,0 +1,31 @@
+---
+to: src/stores/<%=h.changeCase.pascal(name)%>/epics.<%=h.changeCase.dot(name)%>.ts
+---
+import Types from 'MyTypes';
+import { Epic } from 'redux-observable';
+import { filter, mergeMap, map } from 'rxjs/operators';
+import { isActionOf } from 'typesafe-actions';
+
+import { actions } from './redux.<%=h.changeCase.dot(name)%>';
+import { getAll<%=h.changeCase.pascal(name)%>sObservable, add<%=h.changeCase.pascal(name)%>Observable } from './api.<%=h.changeCase.dot(name)%>';
+
+const { fetch<%=h.changeCase.pascal(name)%>sAsync, add<%=h.changeCase.pascal(name)%>Async } = actions;
+
+// Disable our epic so we can demonstrate thunk usage without causing conflicts
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const load<%=h.changeCase.pascal(name)%>sEpic: Epic<Types.RootAction, Types.RootAction, Types.RootState> = action$ =>
+  action$.pipe(
+    filter(isActionOf(fetch<%=h.changeCase.pascal(name)%>sAsync.request)),
+    mergeMap(() => getAll<%=h.changeCase.pascal(name)%>sObservable().pipe(map(response => fetch<%=h.changeCase.pascal(name)%>sAsync.success(response.data.results)))),
+  );
+
+const add<%=h.changeCase.pascal(name)%>Epic: Epic<Types.RootAction, Types.RootAction, Types.RootState> = action$ =>
+  action$.pipe(
+    filter(isActionOf(add<%=h.changeCase.pascal(name)%>Async.request)),
+    mergeMap(action => add<%=h.changeCase.pascal(name)%>Observable(action.payload).pipe(map(response => add<%=h.changeCase.pascal(name)%>Async.success(response.data)))),
+  );
+
+export default {
+  // load<%=h.changeCase.pascal(name)%>sEpic,
+  add<%=h.changeCase.pascal(name)%>Epic,
+};

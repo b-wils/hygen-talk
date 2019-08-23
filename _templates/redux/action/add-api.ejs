@@ -1,0 +1,19 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/api.<%=h.changeCase.dot(name)%>.ts
+after: // API
+skip_if: export const <%=h.changeCase.camel(action)%>
+---
+<%
+var responseType = h.changeCase.pascal(action) + 'Response'
+var apiFunction = h.changeCase.camel(action)
+var apiMethod = h.changeCase.lower(method)
+var apiPath = h.changeCase.lower(path)
+-%>
+interface <%=responseType%> {
+  results;
+}
+
+export const <%=apiFunction%> = (props) => {
+  return axios.<%=apiMethod%><<%=responseType%>>('<%=apiPath%>', props);
+};

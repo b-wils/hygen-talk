@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/thunks.<%=h.changeCase.dot(name)%>.ts
+after: // Generated thunks
+skip_if: <%=h.changeCase.camel(action)%>Thunk
+---
+export const <%=h.changeCase.camel(action)%>Thunk = apiThunkGenerator<apiProps>(<%=h.changeCase.camel(action)%>Async, <%=h.changeCase.camel(action)%>);

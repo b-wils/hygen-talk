@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/redux.<%=h.changeCase.dot(name)%>.ts
+after: export const actions = {
+skip_if: <%=h.changeCase.camel(action)%>Async,
+---
+  <%=h.changeCase.camel(action)%>Async,

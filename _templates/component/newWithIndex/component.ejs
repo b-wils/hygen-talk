@@ -1,0 +1,15 @@
+---
+to: src/components/<%=h.changeCase.pascal(name)%>/<%=h.changeCase.pascal(name)%>.js
+---
+<%
+var pascalName = h.changeCase.pascal(name);
+-%>
+import * as React from 'react';
+
+const <%=pascalName%> = props => (
+  <div>
+    Hello world!
+  </div>
+);
+
+export default <%=pascalName%>;

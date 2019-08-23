@@ -1,0 +1,16 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/redux.<%=h.changeCase.dot(name)%>.ts
+after: // Actions
+skip_if: <%=h.changeCase.constant(action)%>
+---
+<%
+var asyncActionFunction = h.changeCase.camel(action) + 'Async'
+var actionPrefix = h.changeCase.camel(name) + '/' + h.changeCase.constantCase(action)
+-%>
+const <%=asyncActionFunction%> = createAsyncAction(
+  '<%=actionPrefix%>_REQUEST',
+  '<%=actionPrefix%>_SUCCESS',
+  '<%=actionPrefix%>_FAILURE',
+  '<%=actionPrefix%>_CANCEL',
+)<requestProps, successProps, Error, string>();

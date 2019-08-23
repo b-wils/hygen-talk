@@ -1,0 +1,14 @@
+---
+to: src/stores/<%=h.changeCase.pascal(name)%>/index.ts
+---
+import { actions, reducerPath, reducer, selectors, <%=h.changeCase.pascal(name)%> } from './redux.<%=h.changeCase.dot(name)%>';
+import epics from './epics.<%=h.changeCase.dot(name)%>';
+import thunks from './thunks.<%=h.changeCase.dot(name)%>';
+
+// Default exports create some weird circular dependcy issues with our reducer/selectors since they
+// receive global state via ambient declarations. Named exports works around this at the cost of
+// needing to "import * as redux..." when used
+export { reducer, reducerPath, selectors, actions, epics, thunks };
+
+// Types need to be manually reexported
+export type <%=h.changeCase.pascal(name)%> = <%=h.changeCase.pascal(name)%>;

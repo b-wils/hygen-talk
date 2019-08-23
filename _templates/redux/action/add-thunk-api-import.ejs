@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/thunks.<%=h.changeCase.dot(name)%>.ts
+before: from './api.auth';
+skip_if: <%=h.changeCase.camel(action)%>,
+---
+  <%=h.changeCase.camel(action)%>,

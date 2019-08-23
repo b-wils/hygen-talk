@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/rootReducer.ts
+after: rootReducer
+skip_if: <%=h.changeCase.camel(name)%>.reducerPath
+---
+  [<%=h.changeCase.camel(name)%>.reducerPath]: <%=h.changeCase.camel(name)%>.reducer,

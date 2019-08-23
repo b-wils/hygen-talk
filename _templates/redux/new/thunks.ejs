@@ -1,0 +1,31 @@
+---
+to: src/stores/<%=h.changeCase.pascal(name)%>/thunks.<%=h.changeCase.dot(name)%>.ts
+---
+// eslint-disable-next-line prettier/prettier
+import { 
+  getAll<%=h.changeCase.pascal(name)%>s,
+} from './api.<%=h.changeCase.dot(name)%>';
+
+import { actions } from './redux.<%=h.changeCase.dot(name)%>';
+import { Dispatch } from 'redux';
+
+// eslint-disable-next-line prettier/prettier
+const {
+  fetch<%=h.changeCase.pascal(name)%>sAsync,
+} = actions;
+
+export const getAll<%=h.changeCase.pascal(name)%>sThunk = () => async (dispatch: Dispatch): Promise<void> => {
+  dispatch(fetch<%=h.changeCase.pascal(name)%>sAsync.request());
+  try {
+    const response = await getAll<%=h.changeCase.pascal(name)%>s();
+    dispatch(fetch<%=h.changeCase.pascal(name)%>sAsync.success(response.data.results));
+  } catch (err) {
+    dispatch(fetch<%=h.changeCase.pascal(name)%>sAsync.failure(err));
+  }
+};
+
+// Generated thunks
+
+export default {
+  getAll<%=h.changeCase.pascal(name)%>sThunk,
+};

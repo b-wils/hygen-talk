@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/rootReducer.ts
+before: import \*
+skip_if: <%=h.changeCase.pascal(name)%>
+---
+import * as <%=h.changeCase.camel(name)%> from './<%=h.changeCase.pascal(name)%>';

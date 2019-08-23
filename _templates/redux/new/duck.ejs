@@ -1,0 +1,65 @@
+---
+to: src/stores/<%=h.changeCase.pascal(name)%>/redux.<%=h.changeCase.dot(name)%>.ts
+---
+import { combineReducers } from 'redux';
+import { ActionType, createAsyncAction, createReducer } from 'typesafe-actions';
+
+import Types from 'MyTypes';
+
+// Constants
+export const reducerPath = '<%=h.changeCase.camel(name)%>';
+
+// Model
+export interface <%=h.changeCase.ucFirst(name)%> {
+  text: string;
+  id?: number;
+}
+
+// It would be nice to dynamically construct these but it causes issues with type inference
+// Actions
+const fetch<%=h.changeCase.ucFirst(name)%>sAsync = createAsyncAction(
+  '<%=h.changeCase.camel(name)%>/FETCH_<%=h.changeCase.constantCase(name)%>S_REQUEST',
+  '<%=h.changeCase.camel(name)%>/FETCH_<%=h.changeCase.constantCase(name)%>S_SUCCESS',
+  '<%=h.changeCase.camel(name)%>/FETCH_<%=h.changeCase.constantCase(name)%>S_FAILURE',
+  '<%=h.changeCase.camel(name)%>/FETCH_<%=h.changeCase.constantCase(name)%>S_CANCEL',
+)<undefined, <%=h.changeCase.ucFirst(name)%>[], Error, string>();
+
+const add<%=h.changeCase.ucFirst(name)%>Async = createAsyncAction(
+  '<%=h.changeCase.camel(name)%>/ADD_<%=h.changeCase.constantCase(name)%>_REQUEST',
+  '<%=h.changeCase.camel(name)%>/ADD_<%=h.changeCase.constantCase(name)%>_SUCCESS',
+  '<%=h.changeCase.camel(name)%>/ADD_<%=h.changeCase.constantCase(name)%>_FAILURE',
+  '<%=h.changeCase.camel(name)%>/ADD_<%=h.changeCase.constantCase(name)%>_CANCEL',
+)<<%=h.changeCase.ucFirst(name)%>, <%=h.changeCase.ucFirst(name)%>, Error, string>();
+
+export const actions = {
+  fetch<%=h.changeCase.ucFirst(name)%>sAsync,
+  add<%=h.changeCase.ucFirst(name)%>Async,
+};
+
+// Types
+export interface <%=h.changeCase.ucFirst(name)%>sState {
+  <%=h.changeCase.camel(name)%>: <%=h.changeCase.pascal(name)%>[];
+}
+
+export type <%=h.changeCase.ucFirst(name)%>sAction = ActionType<typeof actions>;
+
+// Initial state
+const initialState: <%=h.changeCase.ucFirst(name)%>sState = {
+  <%=h.changeCase.camel(name)%>: [],
+};
+
+// Reducers
+export const reducer = combineReducers<<%=h.changeCase.pascal(name)%>sState, <%=h.changeCase.pascal(name)%>sAction>({
+  <%=h.changeCase.camel(name)%>: createReducer(initialState.<%=h.changeCase.camel(name)%>)
+    .handleAction(fetch<%=h.changeCase.pascal(name)%>sAsync.success, (state, action) => {
+      return [...action.payload];
+    })
+    .handleAction(add<%=h.changeCase.pascal(name)%>Async.success, (state, action) => {
+      return [...state, action.payload];
+    }),
+});
+
+// Selectors
+export const selectors = {
+  get<%=h.changeCase.pascal(name)%>s: (state: Types.RootState) => state.<%=h.changeCase.camel(name)%>.<%=h.changeCase.camel(name)%>,
+};

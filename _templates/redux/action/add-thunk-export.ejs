@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/<%=h.changeCase.pascal(name)%>/thunks.<%=h.changeCase.dot(name)%>.ts
+after: export default
+skip_if: <%=h.changeCase.camel(action)%>Thunk,
+---
+  <%=h.changeCase.camel(action)%>Thunk,

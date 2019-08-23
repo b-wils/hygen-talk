@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/rootAction.ts
+after: const rootAction = {
+skip_if: <%=h.changeCase.camel(name)%>.reducerPath
+---
+  [<%=h.changeCase.camel(name)%>.reducerPath]: <%=h.changeCase.camel(name)%>.actions,

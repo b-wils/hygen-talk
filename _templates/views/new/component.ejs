@@ -1,0 +1,22 @@
+---
+to: src/views/<%=visibilityPath%>/<%=h.changeCase.pascal(name)%>/<%=h.changeCase.pascal(name)%>.tsx
+---
+<%var pascalName = h.changeCase.pascal(name);%>
+import * as React from 'react';
+import styled from 'styled-components';
+
+export interface <%=pascalName%>Props {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+const <%=pascalName%>: React.SFC<<%=pascalName%>Props> = props => (
+  <Styled<%=pascalName%> className={props.className}>
+    {props.children}
+  </Styled<%=pascalName%>>
+);
+
+const Styled<%=pascalName%> = styled.div`
+`;
+
+export default <%=pascalName%>;

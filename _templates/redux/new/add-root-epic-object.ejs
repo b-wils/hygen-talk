@@ -1,0 +1,7 @@
+---
+inject: true
+to: src/stores/rootEpic.ts
+before: Object.values
+skip_if: <%=h.changeCase.camel(name)%>.epics
+---
+  ...Object.values(<%=h.changeCase.camel(name)%>.epics),

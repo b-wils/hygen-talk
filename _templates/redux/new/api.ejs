@@ -1,0 +1,24 @@
+---
+to: src/stores/<%=h.changeCase.pascal(name)%>/api.<%=h.changeCase.dot(name)%>.ts
+---
+import axios from 'axios';
+import { from } from 'rxjs';
+
+import { <%=h.changeCase.pascal(name)%> } from './redux.<%=h.changeCase.dot(name)%>';
+
+// API
+interface <%=h.changeCase.pascal(name)%>sResponse {
+  results: [<%=h.changeCase.pascal(name)%>];
+}
+
+export const getAll<%=h.changeCase.pascal(name)%>s = () => {
+  return axios.get<<%=h.changeCase.pascal(name)%>sResponse>('<%=h.changeCase.param(name)%>s');
+};
+
+export const add<%=h.changeCase.pascal(name)%> = (<%=h.changeCase.camel(name)%>: <%=h.changeCase.pascal(name)%>) => {
+  return axios.post<<%=h.changeCase.pascal(name)%>>('<%=h.changeCase.param(name)%>s', <%=h.changeCase.camel(name)%>);
+};
+
+export const getAll<%=h.changeCase.pascal(name)%>sObservable = () => from(getAll<%=h.changeCase.pascal(name)%>s());
+
+export const add<%=h.changeCase.pascal(name)%>Observable = (<%=h.changeCase.camel(name)%>: <%=h.changeCase.pascal(name)%>) => from(add<%=h.changeCase.pascal(name)%>(<%=h.changeCase.camel(name)%>));
