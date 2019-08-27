@@ -1,6 +1,9 @@
 ---
 to: src/components/<%=h.changeCase.pascal(name)%>/index.ts
 ---
-import <%=h.changeCase.pascal(name)%> from './<%=h.changeCase.pascal(name)%>';
+<%
+var pascalName = h.changeCase.pascal(name);
+-%>
+import <%=pascalName%> from './<%=pascalName%>';
 
-export default <%=h.changeCase.pascal(name)%>;
+export default <%=pascalName%>;

@@ -1,0 +1,10 @@
+---
+inject: true
+to: src/components/index.js
+after: export {
+skip_if: <%=h.changeCase.pascal(name)%>,
+---
+<%
+var pascalName = h.changeCase.pascal(name);
+-%>
+  <%=pascalName%>,

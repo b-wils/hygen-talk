@@ -1,15 +1,12 @@
 ---
-to: src/components/<%=h.changeCase.pascal(name)%>/<%=h.changeCase.pascal(name)%>.js
+to: src/components/<%=name%>/<%=name%>.js
 ---
-<%
-var pascalName = h.changeCase.pascal(name);
--%>
 import * as React from 'react';
 
-const <%=pascalName%> = props => (
+const <%=name%> = props => (
   <div>
-    Hello world!
+    My new component <%=name%>
   </div>
 );
 
-export default <%=pascalName%>;
+export default <%=name%>;

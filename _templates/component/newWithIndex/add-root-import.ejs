@@ -1,0 +1,10 @@
+---
+inject: true
+to: src/components/index.js
+after: // Components
+skip_if: import <%=h.changeCase.pascal(name)%> from
+---
+<%
+var pascalName = h.changeCase.pascal(name);
+-%>
+import <%=pascalName%> from './<%=pascalName%>'
